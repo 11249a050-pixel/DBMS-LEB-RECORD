@@ -1,0 +1,307 @@
+
+SQL*Plus: Release 11.2.0.1.0 Production on Tue Jul 28 02:33:24 2026
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+Enter user-name: A050@db2021
+Enter password:
+
+Connected to:
+Oracle Database 11g Release 11.2.0.1.0 - Production
+
+SQL> create table employee(
+  2  Empno number(4) primary key,
+  3  Ename Varchar2(20),
+  4  JOB date,
+  5  Sal Number(5));
+create table employee(
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> create table student(
+  2  reg_no number(5),
+  3  Name  Varchar2(20),
+  4
+SQL>
+SQL> create table student(
+  2  reg_no Varchar2(20),
+  3  Name char(10),
+  4  Course char(10),
+  5  year number(2));
+
+Table created.
+
+SQL> desc student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REG_NO                                             VARCHAR2(20)
+ NAME                                               CHAR(10)
+ COURSE                                             CHAR(10)
+ YEAR                                               NUMBER(2)
+
+SQL> insert into student values(A050 ,'Jhansi','BE-CSE',3);
+insert into student values(A050 ,'Jhansi','BE-CSE',3)
+                           *
+ERROR at line 1:
+ORA-00984: column not allowed here
+
+
+SQL> insert into student values('A050','Jhansi','BE-CSE',03);
+
+1 row created.
+
+SQL> select * from student;
+
+REG_NO               NAME       COURSE           YEAR
+-------------------- ---------- ---------- ----------
+A050                 Jhansi     BE-CSE              3
+
+SQL> insert into student values('A055','bhuvana','BE-CSE',03);
+
+1 row created.
+
+SQL> select * from student;
+
+REG_NO               NAME       COURSE           YEAR
+-------------------- ---------- ---------- ----------
+A050                 Jhansi     BE-CSE              3
+A055                 bhuvana    BE-CSE              3
+
+SQL> create table student1(
+  2  reg_no Varchar2(20),
+  3  Name char(10),
+  4  Course char(10),
+  5  year number(2));
+
+Table created.
+
+SQL> create table student2 as select * from student;
+
+Table created.
+
+SQL> desc student2
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REG_NO                                             VARCHAR2(20)
+ NAME                                               CHAR(10)
+ COURSE                                             CHAR(10)
+ YEAR                                               NUMBER(2)
+
+SQL> create table student3 as select reg_no,name,year from student;
+
+Table created.
+
+SQL> desc student3;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REG_NO                                             VARCHAR2(20)
+ NAME                                               CHAR(10)
+ YEAR                                               NUMBER(2)
+
+SQL> insert into student(reg_no,name)values('A061','varshini');
+
+1 row created.
+
+SQL> select * from student;
+
+REG_NO               NAME       COURSE           YEAR
+-------------------- ---------- ---------- ----------
+A050                 Jhansi     BE-CSE              3
+A055                 bhuvana    BE-CSE              3
+A061                 varshini
+
+SQL> insert into student values('&reg_no','&name','&course','&year');
+Enter value for reg_no: A033
+Enter value for name: dhana
+Enter value for course: cse
+Enter value for year: 4
+old   1: insert into student values('&reg_no','&name','&course','&year')
+new   1: insert into student values('A033','dhana','cse','4')
+
+1 row created.
+
+SQL> select * from student;
+
+REG_NO               NAME       COURSE           YEAR
+-------------------- ---------- ---------- ----------
+A050                 Jhansi     BE-CSE              3
+A055                 bhuvana    BE-CSE              3
+A061                 varshini
+A033                 dhana      cse                 4
+
+SQL> /
+
+REG_NO               NAME       COURSE           YEAR
+-------------------- ---------- ---------- ----------
+A050                 Jhansi     BE-CSE              3
+A055                 bhuvana    BE-CSE              3
+A061                 varshini
+A033                 dhana      cse                 4
+
+SQL> /
+
+REG_NO               NAME       COURSE           YEAR
+-------------------- ---------- ---------- ----------
+A050                 Jhansi     BE-CSE              3
+A055                 bhuvana    BE-CSE              3
+A061                 varshini
+A033                 dhana      cse                 4
+
+SQL> insert into student values('&reg_no','&name','&course','&year');
+Enter value for reg_no: A020
+Enter value for name: aishu
+Enter value for course: aiml
+Enter value for year: 4
+old   1: insert into student values('&reg_no','&name','&course','&year')
+new   1: insert into student values('A020','aishu','aiml','4')
+
+1 row created.
+
+SQL> /
+Enter value for reg_no: A034
+Enter value for name: danyy
+Enter value for course: ai
+Enter value for year: 4
+old   1: insert into student values('&reg_no','&name','&course','&year')
+new   1: insert into student values('A034','danyy','ai','4')
+
+1 row created.
+
+SQL> select * from student;
+
+REG_NO               NAME       COURSE           YEAR
+-------------------- ---------- ---------- ----------
+A050                 Jhansi     BE-CSE              3
+A055                 bhuvana    BE-CSE              3
+A061                 varshini
+A033                 dhana      cse                 4
+A020                 aishu      aiml                4
+A034                 danyy      ai                  4
+
+6 rows selected.
+
+SQL> create table student4 as select reg_no,name from student where 7>9;
+
+Table created.
+
+SQL> select * from student4;
+
+no rows selected
+
+SQL> create table student2 as select * from student;
+create table student2 as select * from student
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> create table emp4 as select * from student;
+
+Table created.
+
+SQL> select * from student;
+
+REG_NO               NAME       COURSE           YEAR
+-------------------- ---------- ---------- ----------
+A050                 Jhansi     BE-CSE              3
+A055                 bhuvana    BE-CSE              3
+A061                 varshini
+A033                 dhana      cse                 4
+A020                 aishu      aiml                4
+A034                 danyy      ai                  4
+
+6 rows selected.
+
+SQL> rename stu1tostu2
+  2
+SQL> ALTER TABLE old student
+  2  RENAME TO new student5;
+ALTER TABLE old student
+                *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> alter table student modify name char(20);
+
+Table altered.
+
+SQL> desc student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REG_NO                                             VARCHAR2(20)
+ NAME                                               CHAR(20)
+ COURSE                                             CHAR(10)
+ YEAR                                               NUMBER(2)
+
+SQL> rename old_student to new_student5;
+rename old_student to new_student5
+*
+ERROR at line 1:
+ORA-04043: object OLD_STUDENT does not exist
+
+
+SQL> rename old_student1 to new_student6;
+rename old_student1 to new_student6
+*
+ERROR at line 1:
+ORA-04043: object OLD_STUDENT1 does not exist
+
+
+SQL> alter table student rename to student6;
+
+Table altered.
+
+SQL> delete from student6 where year=3;
+
+2 rows deleted.
+
+SQL> select * from student6;
+
+REG_NO               NAME                 COURSE           YEAR
+-------------------- -------------------- ---------- ----------
+A061                 varshini
+A033                 dhana                cse                 4
+A020                 aishu                aiml                4
+A034                 danyy                ai                  4
+
+SQL> delete from student6 where reg_no=A061;
+delete from student6 where reg_no=A061
+                                  *
+ERROR at line 1:
+ORA-00904: "A061": invalid identifier
+
+
+SQL> delete from student6 where reg_no;
+delete from student6 where reg_no
+                                *
+ERROR at line 1:
+ORA-00920: invalid relational operator
+
+
+SQL> delete from student6 where reg_no =A061;
+delete from student6 where reg_no =A061
+                                   *
+ERROR at line 1:
+ORA-00904: "A061": invalid identifier
+
+
+SQL> delete from student6 where reg_no='A061';
+
+1 row deleted.
+
+SQL> select * from student6;
+
+REG_NO               NAME                 COURSE           YEAR
+-------------------- -------------------- ---------- ----------
+A033                 dhana                cse                 4
+A020                 aishu                aiml                4
+A034                 danyy                ai                  4
+
+SQL> drop table student6;
+
+Table dropped.
+
+SQL>
