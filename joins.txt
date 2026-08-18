@@ -1,0 +1,127 @@
+Enter user-name: A050@db2021
+Enter password:
+
+Connected to:
+Oracle Database 11g Release 11.2.0.1.0 - Production
+> desc student20;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STUDENT_ID                                         VARCHAR2(10)
+ NAME                                               CHAR(20)
+ COURSE_ID                                          NUMBER(5)
+
+SQL> desc course5;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ COURSE_ID                                          NUMBER(5)
+ COURSE_NAME                                        CHAR(10)
+ insert into student20 values('A050','jhnasi',101);
+
+1 row created.
+
+SQL> insert into student20 values('A060','jyothi',102);
+
+1 row created.
+
+SQL> insert into student20 values('A061','kishore',103);
+
+1 row created.
+
+SQL> select * from student20;
+
+STUDENT_ID NAME                  COURSE_ID
+---------- -------------------- ----------
+A050       jhnasi                      101
+A060       jyothi                      102
+A061       kishore                     103
+
+SQL> insert into course5 values(101,'cse');
+
+1 row created.
+
+SQL> insert into course5 values(102,'aiml');
+
+1 row created.
+
+SQL> insert into course5 values(103,'aids');
+
+1 row created.
+
+SQL> select * from course5;
+
+ COURSE_ID COURSE_NAM
+---------- ----------
+       101 cse
+       102 aiml
+       103 aids
+ select student_id,name,course_name from student20,course5;
+
+STUDENT_ID NAME                 COURSE_NAM
+---------- -------------------- ----------
+A050       jhnasi               cse
+A050       jhnasi               aiml
+A050       jhnasi               aids
+A060       jyothi               cse
+A060       jyothi               aiml
+A060       jyothi               aids
+A061       kishore              cse
+A061       kishore              aiml
+A061       kishore              aids
+
+9 rows selected.
+select student_id,name,course5.course_id,course_name  from student20,course5 where student20.course_id=course5.course_id;
+
+STUDENT_ID NAME                  COURSE_ID COURSE_NAM
+---------- -------------------- ---------- ----------
+A050       jhnasi                      101 cse
+A060       jyothi                      102 aiml
+A061       kishore                     103 aids
+
+SQL> SELECT s1.name AS student1,
+  2         s2.name AS student2,
+  3         s1.course_id
+  4  FROM student20 s1, student20 s2
+  5  WHERE s1.course_id = s2.course_id
+  6  AND s1.student_id < s2.student_id;
+
+no rows selected
+insert into course5 values(101,'ece');
+
+1 row created.
+
+SQL> insert into student20 values('Ac054','deepa',101);
+
+1 row created.
+
+SQL> SELECT s1.name AS student1,
+  2         s2.name AS student2,
+  3         s1.course_id
+  4  FROM student20 s1, student20 s2
+  5  WHERE s1.course_id = s2.course_id
+  6  AND s1.student_id < s2.student_id;
+
+STUDENT1             STUDENT2              COURSE_ID
+-------------------- -------------------- ----------
+jhnasi               deepa                       101
+
+SQL> select student_id,name,course_id from student20;
+
+STUDENT_ID NAME                  COURSE_ID
+---------- -------------------- ----------
+A050       jhnasi                      101
+A060       jyothi                      102
+A061       kishore                     103
+Ac054      deepa                       101
+
+SQL> select a.student_id,a.name,b.course_id,b.course_name loc from student20 a , course5 b where a.course_id(+)=b.course_id;
+
+STUDENT_ID NAME                  COURSE_ID LOC
+---------- -------------------- ---------- ----------
+A050       jhnasi                      101 ece
+A050       jhnasi                      101 cse
+A060       jyothi                      102 aiml
+A061       kishore                     103 aids
+Ac054      deepa                       101 ece
+Ac054      deepa                       101 cse
+
+6 rows selected.
