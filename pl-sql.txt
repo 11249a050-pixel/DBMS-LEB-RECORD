@@ -1,0 +1,175 @@
+
+SQL> set serveroutput on;
+SQL> declare
+  2  n number;
+  3  begin
+  4  n:=&n;
+  5  if n>0 then
+  6  dbms_output.put_line('the number is positive');
+  7  elsif n<0 then
+  8  dbms_output.put_line('the number is negative');
+  9  else
+ 10  dbms_output.put_line('the number is zero');
+ 11  end if;
+ 12  end;
+ 13   /
+Enter value for n: 25
+old   4: n:=&n;
+new   4: n:=25;
+the number is positive
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for n: -15
+old   4: n:=&n;
+new   4: n:=-15;
+the number is negative
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for n: 0
+old   4: n:=&n;
+new   4: n:=0;
+the number is zero
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on;
+SQL> declare
+  2  a number:=100;
+  3  b number:=0;
+  4  c number;
+  5  begin
+  6  c:=a/b;
+  7  dbms_output.put_line('result='||c);
+  8  exception
+  9  when zero_divide then
+ 10  dbms_output.put_line('error:division by zero is not allowed.');
+ 11  end;
+ 12  /
+error:division by zero is not allowed.
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on;
+SQL> declare
+  2  a number:=4;
+  3  b number:=2;
+  4  c number;
+  5  begin
+  6  c:=a/b;
+  7  dbms_output.put_line('result= '||c);
+  8  exception
+  9  when zero_divide then
+ 10  dbms_output.put_line('error:division by zero is not allowed.');
+ 11  end;
+ 12  /
+result= 2
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+result= 2
+
+PL/SQL procedure successfully completed.
+
+SQL> desc student21;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STUDENT_ID                                NOT NULL NUMBER(5)
+ STUDENT_NAME                                       VARCHAR2(30)
+ DEPARTMENT                                         VARCHAR2(20)
+ MARKS                                              NUMBER(3)
+
+SQL> select * from student21;
+
+STUDENT_ID STUDENT_NAME                   DEPARTMENT                MARKS
+---------- ------------------------------ -------------------- ----------
+         1 sita                           cse                          90
+         2 ram                            ece                          95
+         3 geeta                          civil                        75
+         4 roja                           IT                           85
+         5 raju                           mech                         92
+         6 rani                           cse                          80
+         7 deepa                          ece                          97
+
+7 rows selected.
+
+SQL> set serveroutput on;
+SQL> declare
+  2  v_name student21.student_name%type;
+  3  begin
+  4  select student_name into v_name from student21 where student_id=1;
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13  end;
+ 14  /
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on;
+SQL> declare
+  2  v_name student21.student_name%type;
+  3  begin
+  4  select student_name into v_name from student21 where student_id=1;
+  5  end;
+  6  /
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on;
+SQL> declare
+  2  v_name student21.student_name%type;
+  3  begin
+  4  select student_name into v_name from student21 where student_id=1;
+  5  end;
+  6
+  7
+  8
+  9  /
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on;
+SQL> declare
+  2  v_name student21.student_name%type;
+  3  begin
+  4  select student_name into v_name from student21 where student_id=1;
+  5  dbms_output.put_line(v_name);
+  6  exception
+  7  when no_data_found then
+  8  dbms_output.put_line('error:no matching record found.');
+  9  end;
+ 10  /
+sita
+
+PL/SQL procedure successfully completed.
+
+SQL> set serverouput on;
+SP2-0735: unknown SET option beginning "serveroupu..."
+SQL> set serveruotput on;
+SP2-0735: unknown SET option beginning "serveruotp..."
+SQL> set serveroutput on;
+SQL> declare
+  2  v_name student21.student_name%type;
+  3  begin
+  4  select student_name into v_name from student21;
+  5  dbms_output.put_line(v_name);
+  6  exception
+  7  when too_many_rows then
+  8  dbms_output.put_line('error:query returned multiple rows.');
+  9  end;
+ 10  /
+error:query returned multiple rows.
+
+PL/SQL procedure successfully completed.
+
+SQL>
